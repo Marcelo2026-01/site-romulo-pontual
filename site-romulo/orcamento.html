@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Romulo Pontual | Sistema de Orçamento</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Michroma&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DESIGN SYSTEM (ROMULO PONTUAL) --- */
+        :root {
+            --ice: #00f3ff;       
+            --fire: #ffaa00;      
+            --dark-bg: #050505;
+            --glass: rgba(20, 30, 50, 0.9);
+            --whatsapp: #25D366;
+            --danger: #ff4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; font-family: 'Montserrat', sans-serif; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            padding-bottom: 140px; /* Espaço para o rodapé móvel */
+            min-height: 100vh;
+            /* Fundo Nano-Gelo */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 98, 255, 0.1), transparent 40%);
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* --- NEVE NO FUNDO (NÃO ATRAPALHA) --- */
+        #snow-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1;
+        }
+        .snowflake {
+            position: absolute; top: -20px; color: rgba(255, 255, 255, 0.8);
+            font-size: 1em; font-family: Arial, sans-serif; user-select: none;
+            will-change: transform;
+            animation-name: snowfall; animation-timing-function: linear; animation-iteration-count: infinite;
+        }
+        @keyframes snowfall { 0% { transform: translateY(-20px); } 100% { transform: translateY(100vh); } }
+
+        /* HEADER */
+        header {
+            text-align: center; padding: 30px 20px;
+            border-bottom: 2px solid var(--ice);
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+        }
+        h1 { 
+            font-family: 'Michroma'; font-size: 20px; margin-bottom: 5px; 
+            color: white; text-transform: uppercase; letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+        .subtitle { color: var(--fire); font-family: 'Rajdhani'; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
+
+        /* INPUTS (MOBILE FRIENDLY) */
+        .client-section { padding: 0 20px; max-width: 600px; margin: 0 auto; display: grid; gap: 15px; }
+        .row { display: flex; gap: 10px; }
+        
+        label { display: block; font-size: 11px; color: var(--ice); margin-bottom: 6px; text-transform: uppercase; font-weight: bold; font-family: 'Michroma'; letter-spacing: 0.5px; }
+        
+        input, select {
+            width: 100%; 
+            background: rgba(15, 25, 35, 0.9); 
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            color: white; padding: 16px; border-radius: 10px; font-size: 16px; /* 16px evita zoom no iPhone */
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--ice); box-shadow: 0 0 15px rgba(0, 243, 255, 0.3); }
+
+        /* BOTÕES DE AÇÃO */
+        .actions-row { display: flex; gap: 10px; margin-top: 15px; }
+        
+        .btn-action {
+            flex: 1; padding: 14px; border-radius: 10px; font-size: 12px; cursor: pointer;
+            font-weight: bold; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            background: rgba(255,255,255,0.05); color: #ccc; transition: 0.3s; font-family: 'Michroma';
+        }
+        .btn-pdf { background: white; color: black; box-shadow: 0 0 15px rgba(255,255,255,0.2); border: none; }
+        .btn-clear { border-color: var(--danger); color: var(--danger); }
+
+        /* LISTA DE ITENS */
+        .items-label { text-align: center; margin: 30px 0 10px; font-family: 'Rajdhani'; color: #888; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+        .items-container { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+        
+        .item-card {
+            background: var(--glass); 
+            backdrop-filter: blur(5px);
+            border-left: 4px solid var(--ice);
+            border-radius: 10px; margin-bottom: 12px; padding: 15px;
+            display: grid; grid-template-columns: 1fr auto auto; gap: 12px;
+            align-items: center; animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
+        .item-details h4 { font-size: 14px; color: white; margin-bottom: 4px; font-weight: bold; text-transform: uppercase; }
+        .item-details p { font-size: 12px; color: #bbb; font-family: 'Rajdhani'; }
+        .item-price { font-family: 'Rajdhani'; font-weight: bold; font-size: 16px; color: var(--ice); }
+        
+        .btn-remove {
+            background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 50%;
+            width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+            font-size: 14px; cursor: pointer;
+        }
+
+        /* BOTÃO FLUTUANTE ADICIONAR (+) */
+        .fab-add {
+            position: fixed; bottom: 100px; right: 20px;
+            width: 65px; height: 65px; 
+            background: linear-gradient(135deg, var(--ice), #0062ff);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 35px; color: white; border: none; cursor: pointer; z-index: 90;
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+            transition: 0.3s;
+        }
+        .fab-add:active { transform: scale(0.95); }
+
+        /* MODAL DE ADIÇÃO */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 95; display: none; backdrop-filter: blur(5px); }
+        .add-section {
+            background: #151515; padding: 25px; border-radius: 25px 25px 0 0;
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            box-shadow: 0 -10px 40px rgba(0, 243, 255, 0.1); z-index: 100;
+            border-top: 2px solid var(--ice);
+            transform: translateY(100%); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .add-section.open { transform: translateY(0); }
+        .add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; margin-top: 15px; }
+        
+        .btn-add-confirm {
+            width: 100%; background: var(--ice); color: black;
+            border: none; padding: 16px; border-radius: 12px; font-weight: bold;
+            text-transform: uppercase; font-family: 'Michroma';
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); font-size: 14px;
+        }
+
+        /* FOOTER TOTAL */
+        .footer-actions {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px);
+            padding: 15px 20px; border-top: 1px solid var(--ice);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 80; padding-bottom: max(15px, env(safe-area-inset-bottom));
+        }
+        .total-display { font-size: 10px; color: #888; font-family: 'Michroma'; text-transform: uppercase; }
+        .total-value { font-size: 24px; color: var(--ice); font-weight: bold; font-family: 'Rajdhani'; }
+        
+        .btn-whatsapp {
+            background: var(--whatsapp); color: white; border: none;
+            padding: 12px 25px; border-radius: 50px; font-weight: bold;
+            display: flex; align-items: center; gap: 8px; font-size: 13px;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+            text-transform: uppercase; letter-spacing: 1px; font-family: 'Michroma';
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- SISTEMA DE IMPRESSÃO (O CORRETOR DE PDF) --- */
+        /* Esta parte cria uma "folha de papel" invisível que só aparece no PDF */
+        @media print {
+            @page { margin: 0; size: A4; }
+            body { 
+                background: white; color: black; padding: 0; margin: 0; 
+                font-family: 'Helvetica', Arial, sans-serif; background-image: none; 
+                -webkit-print-color-adjust: exact;
+            }
+            
+            /* Esconde TUDO que é do app */
+            header, .client-section, .items-container, .items-label, .fab-add, .footer-actions, .overlay, .add-section, #snow-container { display: none !important; }
+            
+            /* Mostra SÓ a folha de impressão */
+            .print-sheet { display: block !important; width: 100%; padding: 40px; box-sizing: border-box; }
+            
+            /* Design da Folha A4 */
+            .print-header { text-align: center; border-bottom: 3px solid #000; padding-bottom: 20px; margin-bottom: 30px; }
+            .print-logo h1 { color: #000; font-size: 28px; font-weight: 900; margin: 0; text-transform: uppercase; }
+            .print-logo p { color: #555; font-size: 14px; margin: 5px 0; letter-spacing: 3px; text-transform: uppercase; }
+            .print-contact { font-size: 12px; color: #444; margin-top: 5px; }
+            
+            .print-info { background: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 1px solid #ddd; }
+            .print-field strong { display: block; font-size: 10px; color: #666; text-transform: uppercase; }
+            .print-field span { display: block; font-size: 14px; font-weight: bold; color: #000; }
+            
+            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+            th { background: #000; color: white; padding: 10px; text-align: left; font-size: 11px; text-transform: uppercase; }
+            td { border-bottom: 1px solid #eee; padding: 12px 10px; font-size: 12px; color: #000; }
+            tr:nth-child(even) { background: #f9f9f9; }
+            
+            .print-total { text-align: right; font-size: 22px; font-weight: bold; padding: 15px; border-top: 2px solid #000; margin-top: 20px; }
+            
+            .print-footer { text-align: center; font-size: 10px; color: #888; margin-top: 50px; border-top: 1px solid #ddd; padding-top: 10px; position: fixed; bottom: 20px; left: 0; width: 100%; }
+        }
+        .print-sheet { display: none; } /* Esconde na tela */
+
+    </style>
+</head>
+<body>
+
+    <div id="snow-container"></div>
+
+    <header>
+        <h1>ROMULO PONTUAL</h1>
+        <div class="subtitle">CLIMATIZAÇÃO E ELÉTRICA</div>
+    </header>
+
+    <div class="client-section">
+        <div>
+            <label>CLIENTE</label>
+            <input type="text" id="clientName" placeholder="Nome do Cliente..." oninput="saveData()">
+        </div>
+        <div class="row">
+            <div style="flex:2">
+                <label>WHATSAPP</label>
+                <input type="tel" id="clientPhone" placeholder="DDD + Número" oninput="saveData()">
+            </div>
+            <div style="flex:1">
+                <label>DATA</label>
+                <input type="text" id="dateDisplay" readonly style="text-align:center; color:#aaa;">
+            </div>
+        </div>
+
+        <div class="actions-row">
+            <button class="btn-action btn-pdf" onclick="generatePDF()">
+                📄 GERAR PDF
+            </button>
+            <button class="btn-action btn-clear" onclick="resetBudget()">
+                🗑️ LIMPAR
+            </button>
+        </div>
+    </div>
+
+    <div class="items-label">ITENS DO SERVIÇO</div>
+    <div id="itemsList" class="items-container">
+        </div>
+
+    <div class="print-sheet" id="printArea">
+        <div class="print-header">
+            <div class="print-logo">
+                <h1>ROMULO PONTUAL</h1>
+                <p>Climatização e Elétrica</p>
+            </div>
+            <div class="print-contact">Mirandiba / Pernambuco • (87) 9913-2068</div>
+        </div>
+        
+        <div class="print-info">
+            <div class="print-field">
+                <strong>Cliente</strong>
+                <span id="pName">Nome do Cliente</span>
+            </div>
+            <div class="print-field">
+                <strong>Telefone</strong>
+                <span id="pPhone">--</span>
+            </div>
+            <div class="print-field">
+                <strong>Data</strong>
+                <span id="pDate">--/--/--</span>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th width="60%">DESCRIÇÃO</th>
+                    <th width="10%" style="text-align:center">QTD</th>
+                    <th width="15%" style="text-align:right">UNIT.</th>
+                    <th width="15%" style="text-align:right">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody id="printTableBody"></tbody>
+        </table>
+
+        <div class="print-total">
+            TOTAL: <span id="pTotal">R$ 0,00</span>
+        </div>
+
+        <div class="print-footer">
+            Orçamento válido por 15 dias. Garantia de serviço técnico especializado.<br>
+            Profissional Qualificado.
+        </div>
+    </div>
+
+    <div style="height: 140px;"></div>
+
+    <button class="fab-add" onclick="toggleModal()">+</button>
+
+    <div class="footer-actions">
+        <div class="total-display">
+            TOTAL ESTIMADO<br>
+            <span class="total-value" id="grandTotal">R$ 0,00</span>
+        </div>
+        <button class="btn-whatsapp" onclick="sendToWhatsApp()">
+            ENVIAR PROPOSTA
+        </button>
+    </div>
+
+    <div class="overlay" onclick="toggleModal()"></div>
+    <div class="add-section" id="addModal">
+        <div class="input-group">
+            <label>SERVIÇO (Digite ou Selecione)</label>
+            <input type="text" id="newItemName" list="servicesList" placeholder="Ex: Higienização..." onchange="autoFillPrice()">
+            <datalist id="servicesList"></datalist>
+        </div>
+        <div class="add-grid">
+            <div>
+                <label>QTD</label>
+                <input type="number" id="newItemQty" value="1" min="1" style="text-align:center;">
+            </div>
+            <div>
+                <label>VALOR (R$)</label>
+                <input type="number" id="newItemPrice" placeholder="0.00" step="0.01">
+            </div>
+        </div>
+        <button class="btn-add-confirm" onclick="addItem()">ADICIONAR</button>
+    </div>
+
+    <script>
+        // --- NEVE OTIMIZADA ---
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            const flakeCount = 20; 
+            for (let i = 0; i < flakeCount; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snowflake';
+                flake.innerHTML = '❄';
+                flake.style.left = Math.random() * 100 + 'vw';
+                flake.style.animationDuration = Math.random() * 5 + 3 + 's';
+                flake.style.opacity = Math.random() * 0.5 + 0.4; 
+                flake.style.fontSize = Math.random() * 10 + 10 + 'px';
+                container.appendChild(flake);
+                flake.addEventListener('animationiteration', () => {
+                    flake.style.left = Math.random() * 100 + 'vw';
+                });
+            }
+        }
+        createSnow();
+
+        // --- LÓGICA DO APP ---
+        let items = [];
+        const catalog = [
+            { name: "Instalação Split 9/12k", price: 350 },
+            { name: "Instalação Split 18/24k", price: 450 },
+            { name: "Higienização Completa", price: 150 },
+            { name: "Carga de Gás", price: 180 },
+            { name: "Infraestrutura (Metro)", price: 80 },
+            { name: "Manutenção Elétrica", price: 100 },
+            { name: "Troca de Disjuntor", price: 40 },
+            { name: "Ponto Elétrico", price: 70 },
+            { name: "Visita Técnica", price: 50 }
+        ];
+
+        window.onload = function() {
+            document.getElementById('dateDisplay').value = new Date().toLocaleDateString('pt-BR');
+            const dl = document.getElementById('servicesList');
+            catalog.forEach(i => {
+                let op = document.createElement('option');
+                op.value = i.name;
+                dl.appendChild(op);
+            });
+            loadData();
+        };
+
+        function autoFillPrice() {
+            const val = document.getElementById('newItemName').value;
+            const found = catalog.find(i => i.name === val);
+            if(found) document.getElementById('newItemPrice').value = found.price.toFixed(2);
+        }
+
+        function toggleModal() {
+            document.getElementById('addModal').classList.toggle('open');
+            document.querySelector('.overlay').style.display = 
+                document.getElementById('addModal').classList.contains('open') ? 'block' : 'none';
+            if(document.getElementById('addModal').classList.contains('open')) {
+                setTimeout(() => document.getElementById('newItemName').focus(), 100);
+            }
+        }
+
+        function addItem() {
+            const name = document.getElementById('newItemName').value;
+            const qty = parseFloat(document.getElementById('newItemQty').value) || 1;
+            const price = parseFloat(document.getElementById('newItemPrice').value) || 0;
+
+            if(!name) return alert('Digite o nome do serviço!');
+
+            items.push({ id: Date.now(), name, qty, price });
+            
+            document.getElementById('newItemName').value = '';
+            document.getElementById('newItemPrice').value = '';
+            document.getElementById('newItemQty').value = '1';
+            
+            toggleModal();
+            render();
+            saveData();
+        }
+
+        function removeItem(id) {
+            if(confirm('Remover este item?')) {
+                items = items.filter(i => i.id !== id);
+                render();
+                saveData();
+            }
+        }
+
+        function render() {
+            // Renderiza na TELA
+            const list = document.getElementById('itemsList');
+            list.innerHTML = '';
+            let total = 0;
+
+            items.forEach(item => {
+                const sub = item.qty * item.price;
+                total += sub;
+                
+                const div = document.createElement('div');
+                div.className = 'item-card';
+                div.innerHTML = `
+                    <div class="item-details">
+                        <h4>${item.name}</h4>
+                        <p>${item.qty} x R$ ${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="item-price">R$ ${sub.toFixed(2)}</div>
+                    <button class="btn-remove" onclick="removeItem(${item.id})">✕</button>
+                `;
+                list.appendChild(div);
+            });
+
+            const totalFmt = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+            document.getElementById('grandTotal').innerText = totalFmt;
+        }
+
+        // --- SISTEMA DE GERAÇÃO DE PDF (CORRIGIDO) ---
+        function generatePDF() {
+            // 1. Preenche os dados do cabeçalho da folha de impressão
+            document.getElementById('pName').innerText = document.getElementById('clientName').value || "Consumidor";
+            document.getElementById('pPhone').innerText = document.getElementById('clientPhone').value || "--";
+            document.getElementById('pDate').innerText = document.getElementById('dateDisplay').value;
+
+            // 2. Preenche a tabela de itens da folha de impressão
+            const tbody = document.getElementById('printTableBody');
+            tbody.innerHTML = '';
+            let total = 0;
+
+            items.forEach(item => {
+                const sub = item.qty * item.price;
+                total += sub;
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.name}</td>
+                    <td style="text-align:center">${item.qty}</td>
+                    <td style="text-align:right">R$ ${item.price.toFixed(2)}</td>
+                    <td style="text-align:right">R$ ${sub.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // 3. Preenche o total da folha
+            document.getElementById('pTotal').innerText = total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+
+            // 4. Manda imprimir (o CSS @media print vai fazer o resto: esconder o app e mostrar a folha)
+            window.print();
+        }
+
+        function saveData() {
+            const data = {
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                items: items
+            };
+            localStorage.setItem('romulo_budget_v3', JSON.stringify(data));
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('romulo_budget_v3');
+            if(saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('clientName').value = data.name || '';
+                document.getElementById('clientPhone').value = data.phone || '';
+                items = data.items || [];
+                render();
+            }
+        }
+        
+        function resetBudget() {
+            if(confirm('Limpar tudo?')) {
+                items = [];
+                document.getElementById('clientName').value = '';
+                document.getElementById('clientPhone').value = '';
+                render();
+                saveData();
+            }
+        }
+
+        function sendToWhatsApp() {
+            const name = document.getElementById('clientName').value || 'Cliente';
+            let total = 0;
+            let msg = `*❄️ ORÇAMENTO - ROMULO PONTUAL*\n\n`;
+            msg += `👤 Cliente: *${name}*\n`;
+            msg += `📅 Data: ${document.getElementById('dateDisplay').value}\n`;
+            msg += `--------------------------------\n`;
+            
+            items.forEach(item => {
+                const sub = item.qty * item.price;
+                total += sub;
+                msg += `▪️ ${item.qty}x ${item.name}\n   (R$ ${sub.toFixed(2)})\n`;
+            });
+            
+            msg += `--------------------------------\n`;
+            msg += `*💰 TOTAL: R$ ${total.toFixed(2)}*\n`;
+            msg += `--------------------------------\n`;
+            
+            const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
