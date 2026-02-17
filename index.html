@@ -3,542 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="Romulo Pontual - Especialista em Climatização e Elétrica. Instalação, Manutenção e Infraestrutura em Mirandiba e Pernambuco.">
-    
-    <meta name="geo.region" content="BR-PE">
-    <meta name="geo.placename" content="Mirandiba">
+    <meta name="description" content="Romulo Pontual - Especialista em Climatização e Elétrica em Mirandiba/PE.">
     
     <meta property="og:title" content="Romulo Pontual | Climatização e Elétrica">
-    <meta property="og:description" content="Instalação de Ar Condicionado, Infraestrutura e Elétrica em Mirandiba/PE. Solicite seu orçamento!">
-    <meta property="og:image" content="Logo-Romulo-Pontual-V2.jpg"> <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:description" content="Instalação, Manutenção e Projetos. Fale comigo no WhatsApp!">
+    <meta property="og:image" content="Logo-Romulo-Pontual-V2.jpg">
     <meta property="og:type" content="website">
     
     <title>Romulo Pontual | Climatização e Elétrica</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Michroma&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- DESIGN SYSTEM (GELO E ENERGIA) --- */
-        :root {
-            --ice: #00f3ff;       
-            --fire: #ffaa00;      
-            --dark-bg: #050505;
-            --glass: rgba(20, 30, 50, 0.9);
-            --whatsapp: #25D366;
-            --instagram: #E1306C;
-        }
-
+        /* --- DESIGN ORIGINAL (AZUL/GELO) --- */
+        :root { --ice: #00f3ff; --fire: #ffaa00; --dark-bg: #050505; --glass: rgba(20, 30, 50, 0.9); --whatsapp: #25D366; }
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.15), transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 170, 0, 0.08), transparent 40%);
-            background-attachment: fixed;
-            position: relative;
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; background-image: radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.15), transparent 40%), radial-gradient(circle at 90% 80%, rgba(255, 170, 0, 0.08), transparent 40%); background-attachment: fixed; }
+        
+        .snowflake { position: fixed; top: -20px; color: #fff; font-size: 1em; z-index: 9999; pointer-events: none; animation: snowfall linear infinite; text-shadow: 0 0 5px rgba(0,243,255,0.8); }
+        @keyframes snowfall { 0% { transform: translateY(-20px) rotate(0deg); } 100% { transform: translateY(100vh) rotate(360deg); } }
+        
+        header { text-align: center; padding: 100px 20px 80px; min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 2px solid var(--ice); background: linear-gradient(to bottom, rgba(5,5,5,0.85), rgba(5,5,5,0.7)), url('bg-ar.jpg'); background-size: cover; background-position: center; }
+        .profile-img { width: 190px; height: 190px; border-radius: 50%; border: 4px solid var(--ice); object-fit: cover; margin-bottom: 25px; box-shadow: 0 0 40px rgba(0,243,255,0.4); animation: pulse 3s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,243,255,0.4); } 70% { box-shadow: 0 0 0 25px rgba(0,243,255,0); } 100% { box-shadow: 0 0 0 0 rgba(0,243,255,0); } }
+        
+        h1 { font-family: 'Michroma'; font-size: 28px; background: linear-gradient(to right, #fff, var(--ice), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .subtitle { font-family: 'Rajdhani'; color: var(--fire); font-size: 22px; letter-spacing: 3px; font-weight: bold; margin-bottom: 30px; }
+        
+        /* BOTÃO ORIGINAL (AZUL) - MANTIVE O DESIGN */
+        .cta-button { 
+            background: linear-gradient(90deg, var(--ice), #0062ff);
+            color: #000; padding: 18px 45px; border-radius: 50px; font-weight: 900; font-family: 'Michroma'; text-decoration: none; display: inline-flex; transition: 0.3s; box-shadow: 0 0 25px rgba(0, 243, 255, 0.4); 
+            cursor: default; /* Mostra que não é clicável */
         }
-
-        /* --- EFEITO NANO-GELO (CALIBRADO E VISÍVEL) --- */
-        .snowflake {
-            position: fixed; 
-            top: -20px; 
-            color: #fff; /* Branco Puro */
-            font-size: 1em; 
-            font-family: Arial, sans-serif; 
-            user-select: none;
-            z-index: 9999; /* Garante visibilidade */
-            pointer-events: none; 
-            will-change: transform;
-            text-shadow: 0 0 5px rgba(0, 243, 255, 0.8); /* Brilho Neon */
-            animation-name: snowfall; 
-            animation-timing-function: linear; 
-            animation-iteration-count: infinite;
-        }
-        @keyframes snowfall { 
-            0% { transform: translateY(-20px) rotate(0deg); } 
-            100% { transform: translateY(100vh) rotate(360deg); } 
-        }
-
-        /* MODO ADMIN */
-        body.admin-mode .editable { border: 1px dashed var(--ice); cursor: text; padding: 2px; background: rgba(0, 243, 255, 0.1); }
-
-        /* --- ANIMAÇÕES --- */
+        /* Removi o efeito de hover exagerado para parecer estático */
+        
+        .info-bar { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 30px 20px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .badge { background: rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 8px; font-size: 12px; border: 1px solid rgba(255,255,255,0.15); font-weight: 600; }
+        
+        .section-title { text-align: center; font-family: 'Michroma'; margin: 60px 0 30px; font-size: 22px; text-shadow: 0 0 15px rgba(0,243,255,0.3); }
+        .grid, .gallery-grid, .review-grid { display: grid; gap: 20px; padding: 0 20px; max-width: 1200px; margin: 0 auto; }
+        .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.15); padding: 30px; border-radius: 15px; }
+        .card h3 { font-family: 'Rajdhani'; color: var(--ice); font-size: 24px; margin-bottom: 15px; }
+        .card.electric h3 { color: var(--fire); }
+        .card ul { padding-left: 20px; line-height: 1.8; color: #eee; font-size: 14px; }
+        
+        .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .gallery-item { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); background: #111; }
+        .gallery-item img { width: 100%; height: 240px; object-fit: cover; }
+        .gallery-desc { padding: 15px; font-size: 13px; text-align: center; }
+        .gallery-desc strong { color: var(--ice); display: block; margin-bottom: 5px; font-family: 'Rajdhani'; font-size: 15px; }
+        
+        .review-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .review-card { background: rgba(255,255,255,0.05); border-left: 3px solid var(--ice); padding: 25px; border-radius: 0 12px 12px 0; }
+        .stars { color: #FFD700; margin-bottom: 10px; letter-spacing: 2px; }
+        .review-text { font-style: italic; color: #ddd; font-size: 13px; }
+        .review-author { font-weight: bold; font-size: 12px; font-family: 'Michroma'; margin-top: 10px; }
+        
+        footer { background: linear-gradient(to top, #000, #0a0a0a); padding: 50px 20px; text-align: center; border-top: 1px solid #222; margin-top: 50px; color: #888; font-size: 12px; }
+        .footer-content { max-width: 900px; margin: 0 auto 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left; }
+        .footer-col h4 { color: #fff; font-family: 'Michroma'; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col li { margin-bottom: 8px; }
+        
+        .social-btn { background: linear-gradient(45deg, #f09433, #bc1888); padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        
+        /* CHAT WHATSAPP - FUNCIONANDO */
+        .whatsapp-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        .whatsapp-trigger { width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); cursor: pointer; border: 2px solid #fff; }
+        .whatsapp-trigger svg { width: 32px; fill: white; }
+        
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- HERO HEADER --- */
-        header {
-            text-align: center; padding: 100px 20px 80px 20px;
-            min-height: 90vh; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; position: relative;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.85), rgba(5,5,5,0.7)), url('bg-ar.jpg'); 
-            background-size: cover; background-position: center;
-            border-bottom: 2px solid var(--ice);
-        }
-
-        .profile-img {
-            width: 190px; height: 190px;
-            border-radius: 50%; border: 4px solid var(--ice);
-            object-fit: cover; margin-bottom: 25px;
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.4);
-            animation: pulse 3s infinite;
-        }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(0, 243, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); } }
-
-        h1 {
-            font-family: 'Michroma'; font-size: 28px; text-transform: uppercase;
-            background: linear-gradient(to right, #fff, var(--ice), #fff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 10px; letter-spacing: 1px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
-        }
-
-        .subtitle { 
-            font-family: 'Rajdhani'; color: var(--fire); font-size: 22px; 
-            letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; 
-            font-weight: bold; text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-        }
-        
-        .cta-button {
-            background: linear-gradient(90deg, var(--ice), #0062ff);
-            color: #000; padding: 18px 45px; border-radius: 50px;
-            font-weight: 900; text-transform: uppercase; font-family: 'Michroma'; font-size: 13px;
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.4); border: none; cursor: pointer;
-            transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-        }
-        .cta-button:hover { transform: scale(1.05); color: white; box-shadow: 0 0 40px rgba(0, 243, 255, 0.6); }
-
-        /* --- INFO BAR --- */
-        .info-bar {
-            display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;
-            padding: 30px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);
-            background: rgba(0,0,0,0.3);
-        }
-        .badge {
-            background: rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 8px;
-            font-size: 12px; display: flex; align-items: center; gap: 8px; 
-            border: 1px solid rgba(255,255,255,0.15); font-weight: 600; letter-spacing: 0.5px;
-        }
-        .badge svg { width: 16px; fill: var(--ice); }
-
-        /* --- SEÇÕES --- */
-        .section-title {
-            text-align: center; font-family: 'Michroma'; color: white; 
-            margin: 60px 0 30px 0; font-size: 22px; text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-        }
-        
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px; padding: 0 20px; max-width: 1200px; margin: 0 auto;
-        }
-        
-        .card {
-            background: var(--glass); backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.15); padding: 35px 30px;
-            border-radius: 15px; transition: 0.3s;
-        }
-        .card:hover { border-color: var(--ice); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .card h3 { font-family: 'Rajdhani'; color: var(--ice); font-size: 24px; margin-bottom: 15px; text-transform: uppercase;}
-        .card ul { padding-left: 20px; line-height: 1.8; color: #eee; font-size: 14px; font-weight: 500; } 
-        .card.electric h3 { color: var(--fire); }
-
-        /* --- DEPOIMENTOS --- */
-        .review-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; padding: 0 20px; max-width: 1000px; margin: 0 auto;
-        }
-        .review-card {
-            background: rgba(255,255,255,0.05); border-left: 3px solid var(--ice);
-            padding: 25px; border-radius: 0 12px 12px 0; backdrop-filter: blur(5px);
-        }
-        .stars { color: #FFD700; margin-bottom: 10px; font-size: 14px; letter-spacing: 2px; }
-        .review-text { font-style: italic; color: #ddd; font-size: 13px; margin-bottom: 15px; line-height: 1.6; }
-        .review-author { font-weight: bold; color: white; font-size: 12px; font-family: 'Michroma'; text-transform: uppercase; }
-
-        /* --- GALERIA --- */
-        .gallery-section { padding: 20px 20px 60px 20px; text-align: center; }
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; max-width: 1000px; margin: 0 auto;
-        }
-        .gallery-item {
-            border-radius: 12px; overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.2); 
-            background: #111;
-            display: flex; flex-direction: column;
-            transition: 0.3s;
-        }
-        .gallery-item:hover { border-color: var(--ice); transform: translateY(-5px); }
-        .gallery-item img { width: 100%; height: 240px; object-fit: cover; border-bottom: 1px solid #333; }
-        .gallery-desc {
-            padding: 15px; font-size: 13px; color: #ddd; 
-            font-family: 'Montserrat'; font-weight: 500;
-            text-align: center; line-height: 1.5;
-        }
-        .gallery-desc strong { color: var(--ice); display: block; margin-bottom: 5px; font-family: 'Rajdhani'; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- RODAPÉ --- */
-        footer {
-            background: linear-gradient(to top, #000, #0a0a0a); 
-            padding: 60px 20px 30px 20px; text-align: center;
-            border-top: 1px solid #222; margin-top: 50px; 
-            color: #888; font-size: 12px;
-        }
-        
-        .footer-content {
-            max-width: 900px; margin: 0 auto;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px; text-align: left; margin-bottom: 40px;
-        }
-        .footer-col h4 { color: white; font-family: 'Michroma'; margin-bottom: 20px; font-size: 13px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .footer-col ul { list-style: none; padding: 0; }
-        .footer-col li { margin-bottom: 10px; color: #aaa; transition: 0.3s; font-size: 13px; }
-        .footer-col li:hover { color: var(--ice); padding-left: 5px; }
-        .footer-col a { color: inherit; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-
-        .social-btn {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-            padding: 12px 20px; border-radius: 8px;
-            display: inline-flex; align-items: center; gap: 10px; color: white !important;
-            font-weight: bold; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(225, 48, 108, 0.3);
-        }
-        .social-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(225, 48, 108, 0.5); }
-
-        .status { color: var(--whatsapp); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; cursor: pointer; user-select: none; }
-        .dot { width: 8px; height: 8px; background: var(--whatsapp); border-radius: 50%; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0.5; } }
-
-        /* --- WHATSAPP WIDGET --- */
-        .whatsapp-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: 'Montserrat', sans-serif; }
-        .whatsapp-trigger {
-            width: 65px; height: 65px; background-color: #25D366; color: white; border-radius: 50%;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6); transition: transform 0.3s; position: relative; border: 2px solid #fff;
-        }
-        .whatsapp-trigger svg { width: 36px !important; height: 36px !important; fill: white !important; display: block; }
-        .whatsapp-trigger:hover { transform: scale(1.1); box-shadow: 0 5px 30px rgba(37, 211, 102, 0.6); }
-        
-        .chat-window {
-            position: absolute; bottom: 85px; right: 0; width: 300px;
-            background: #151515; border-radius: 16px; border: 1px solid var(--ice);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
-            display: none; flex-direction: column; overflow: hidden;
-            opacity: 0; transform: translateY(20px); transition: 0.3s ease;
-        }
-        .show-chat { display: flex !important; opacity: 1 !important; transform: translateY(0) !important; }
-
-        .chat-header { background: linear-gradient(135deg, var(--ice), #0062ff); padding: 18px; display: flex; align-items: center; gap: 12px; }
-        .operator-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; background: #eee; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        .operator-img img { width: 100%; height: 100%; object-fit: cover; }
-        .chat-info h4 { font-size: 14px; margin: 0; color: #000; font-family: 'Michroma'; font-weight: bold; }
-        .chat-info p { font-size: 10px; margin: 0; color: rgba(0,0,0,0.7); font-weight: bold; }
-        
-        .chat-body { padding: 20px; background-color: #0f0f0f; border-bottom: 1px solid #222; }
-        .message-bubble { background: white; color: #111; padding: 12px 16px; border-radius: 4px 16px 16px 16px; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .message-time { font-size: 10px; color: #888; text-align: right; margin-top: 6px; }
-        
-        .chat-footer { padding: 15px; background: #1a1a1a; text-align: center; }
-        .btn-start-chat {
-            background: #25D366; color: white; border: none; padding: 12px 0; border-radius: 30px;
-            font-weight: bold; width: 100%; cursor: pointer; text-transform: uppercase; font-size: 12px;
-            display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn-start-chat:hover { background: #1ebc57; box-shadow: 0 0 15px rgba(37, 211, 102, 0.3); }
-
-        /* Responsividade Footer */
-        @media (max-width: 600px) {
-            .footer-content { grid-template-columns: 1fr; gap: 30px; }
-        }
-
     </style>
 </head>
 <body>
-
     <div id="snow-container"></div>
-
+    
     <header class="reveal">
-        <img src="perfil.jpg" alt="Romulo Pontual - Técnico" class="profile-img">
+        <img src="perfil.jpg" alt="Romulo" class="profile-img">
+        <h1>ROMULO PONTUAL</h1>
+        <div class="subtitle">CLIMATIZAÇÃO E ELÉTRICA</div>
+        <p style="max-width: 500px; margin-bottom: 30px; font-size: 15px; text-shadow: 0 2px 4px black;">Especialista em Instalação de Ar Condicionado, Infraestrutura e Elétrica Predial em Mirandiba e região.</p>
         
-        <h1 class="editable" data-id="h1-title">ROMULO PONTUAL</h1>
-        <div class="subtitle editable" data-id="h2-sub">CLIMATIZAÇÃO E ELÉTRICA</div>
-        
-        <p class="editable" data-id="header-desc" style="max-width: 500px; margin-bottom: 30px; font-size: 15px; color: #fff; text-shadow: 0 2px 4px black; font-weight: 500;">
-            Especialista em Instalação de Ar Condicionado, Infraestrutura e Elétrica Predial. 
-            Atendimento técnico em Mirandiba e região.
-        </p>
-
-        <a href="orcamento.html" class="cta-button">
+        <a href="javascript:void(0)" class="cta-button">
             FAZER ORÇAMENTO ONLINE
         </a>
     </header>
 
     <div class="info-bar reveal">
-        <div class="badge editable" data-id="badge1">
-            SEG A SÁB: 07:00 - 17:00
-        </div>
-        <div class="badge editable" data-id="badge2">
-            ACEITAMOS PIX
-        </div>
-        <div class="badge editable" data-id="badge3">
-            GARANTIA TÉCNICA
-        </div>
+        <div class="badge">SEG A SÁB: 07:00 - 17:00</div>
+        <div class="badge">ACEITAMOS PIX</div>
+        <div class="badge">GARANTIA TÉCNICA</div>
     </div>
 
-    <div class="section-title reveal editable" data-id="title-serv">NOSSOS SERVIÇOS</div>
-
+    <div class="section-title reveal">NOSSOS SERVIÇOS</div>
     <div class="grid reveal">
-        <div class="card">
-            <h3 class="editable" data-id="card1-title">❄️ CLIMATIZAÇÃO</h3>
-            <ul class="editable" data-id="card1-list">
-                <li>Instalação de Split e ACJ</li>
-                <li>Infraestrutura (Tubulação embutida)</li>
-                <li>Limpeza e Higienização Profunda</li>
-                <li>Manutenção Corretiva</li>
-            </ul>
-        </div>
-        
-        <div class="card electric">
-            <h3 class="editable" data-id="card2-title">⚡ ELÉTRICA</h3>
-            <ul class="editable" data-id="card2-list">
-                <li>Instalação Elétrica Residencial</li>
-                <li>Quadros de Distribuição</li>
-                <li>Iluminação e Tomadas</li>
-                <li>Padrão de Entrada</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3 class="editable" data-id="card3-title">🏗️ OBRAS</h3>
-            <ul class="editable" data-id="card3-list">
-                <li>Instalação em Altura</li>
-                <li>Projetos Comerciais</li>
-                <li>Atendimento a Lojas e Escritórios</li>
-                <li>Região Mirandiba/PE</li>
-            </ul>
-        </div>
+        <div class="card"><h3>❄️ CLIMATIZAÇÃO</h3><ul><li>Instalação de Split e ACJ</li><li>Infraestrutura (Tubulação)</li><li>Limpeza Profunda</li><li>Manutenção Corretiva</li></ul></div>
+        <div class="card electric"><h3>⚡ ELÉTRICA</h3><ul><li>Instalação Residencial</li><li>Quadros de Distribuição</li><li>Iluminação e Tomadas</li><li>Padrão de Entrada</li></ul></div>
+        <div class="card"><h3>🏗️ OBRAS</h3><ul><li>Instalação em Altura</li><li>Projetos Comerciais</li><li>Lojas e Escritórios</li><li>Região Mirandiba/PE</li></ul></div>
     </div>
 
-    <div class="section-title reveal editable" data-id="title-gallery">TRABALHOS REALIZADOS</div>
+    <div class="section-title reveal">TRABALHOS REALIZADOS</div>
     <div class="gallery-section reveal">
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="foto1.jpeg" alt="Projeto Elétrico" loading="lazy">
-                <div class="gallery-desc editable" data-id="gal1">
-                    <strong>PROJETO ELÉTRICO</strong>
-                    Farmácia Saúde do Trabalhador. Organização e segurança.
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="foto2.jpeg" alt="Infraestrutura" loading="lazy">
-                <div class="gallery-desc editable" data-id="gal2">
-                    <strong>INFRAESTRUTURA</strong>
-                    Instalação de 5 máquinas em residência. Tubulação estética.
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="foto3.jpeg" alt="Manutenção Preventiva" loading="lazy">
-                <div class="gallery-desc editable" data-id="gal3">
-                    <strong>CUIDADO TOTAL</strong>
-                    Manutenção preventiva com proteção dos seus móveis.
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="foto4.jpeg" alt="Manutenção Altura" loading="lazy">
-                <div class="gallery-desc editable" data-id="gal4">
-                    <strong>MANUTENÇÃO CORRETIVA</strong>
-                    Atendimento especializado em altura e locais difíceis.
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="foto5.jpeg" alt="Higienização" loading="lazy">
-                <div class="gallery-desc editable" data-id="gal5">
-                    <strong>HIGIENIZAÇÃO PREMIUM</strong>
-                    Limpeza profunda com bolsa coletora. Sem sujeira.
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="foto6.jpeg" alt="Pontualidade" loading="lazy">
-                <div class="gallery-desc editable" data-id="gal6">
-                    <strong>PONTUALIDADE</strong>
-                    Instalação técnica seguindo padrões do fabricante.
-                </div>
-            </div>
+            <div class="gallery-item"><img src="foto1.jpeg" alt="Obra"><div class="gallery-desc"><strong>PROJETO ELÉTRICO</strong>Farmácia Saúde do Trabalhador.</div></div>
+            <div class="gallery-item"><img src="foto2.jpeg" alt="Obra"><div class="gallery-desc"><strong>INFRAESTRUTURA</strong>Tubulação estética residencial.</div></div>
+            <div class="gallery-item"><img src="foto3.jpeg" alt="Obra"><div class="gallery-desc"><strong>MANUTENÇÃO</strong>Cuidado total com proteção.</div></div>
         </div>
     </div>
 
-    <div class="section-title reveal">O QUE DIZEM NOSSOS CLIENTES</div>
+    <div class="section-title reveal">DEPOIMENTOS</div>
     <div class="review-grid reveal">
-        <div class="review-card">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p class="review-text">"Profissional excelente. Instalou os splits lá da loja com muita rapidez e não deixou sujeira nenhuma. Recomendo!"</p>
-            <p class="review-author">- Carlos Almeida (Comerciante)</p>
-        </div>
-        <div class="review-card">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p class="review-text">"Me salvou no domingo com a elétrica de casa. Preço justo e muito educado. O serviço ficou perfeito."</p>
-            <p class="review-author">- Maria Fernanda</p>
-        </div>
-        <div class="review-card">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p class="review-text">"Fez a limpeza dos ar condicionados da clínica e melhorou muito o rendimento. Trabalho top."</p>
-            <p class="review-author">- Dr. Ricardo Souza</p>
-        </div>
+        <div class="review-card"><div class="stars">⭐⭐⭐⭐⭐</div><p class="review-text">"Instalou os splits da loja com rapidez e sem sujeira. Recomendo!"</p><p class="review-author">- Carlos Almeida</p></div>
+        <div class="review-card"><div class="stars">⭐⭐⭐⭐⭐</div><p class="review-text">"Me salvou no domingo com a elétrica. Preço justo e educado."</p><p class="review-author">- Maria Fernanda</p></div>
     </div>
 
     <footer class="reveal">
         <div class="footer-content">
-            <div class="footer-col">
-                <h4>ATENDIMENTO</h4>
-                <ul>
-                    <li>(87) 9913-2068</li>
-                    <li>Segunda a Sábado</li>
-                    <li>07:00 às 17:00</li>
-                    <li>Mirandiba / Pernambuco</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>ÁREA DE ATUAÇÃO (SEO)</h4>
-                <ul>
-                    <li>Centro e Região</li>
-                    <li>Área Comercial</li>
-                    <li>Condomínios</li>
-                    <li>Zona Rural (Consultar)</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>REDES SOCIAIS</h4>
-                <p style="color:#aaa; font-size:11px; margin-bottom:10px;">Siga nosso trabalho:</p>
-                <a href="https://www.instagram.com/romulo_pontual_climatizacao/" target="_blank" class="social-btn">
-                    <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.011-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    @romulo_pontual_climatizacao
-                </a>
-            </div>
+            <div class="footer-col"><h4>ATENDIMENTO</h4><ul><li>(87) 9913-2068</li><li>Segunda a Sábado</li><li>Mirandiba / PE</li></ul></div>
+            <div class="footer-col"><h4>REDES SOCIAIS</h4><a href="https://www.instagram.com/romulo_pontual_climatizacao/" target="_blank" class="social-btn">@romulo_pontual_climatizacao</a></div>
         </div>
-
-        <div class="status" id="adminTrigger"><div class="dot"></div> ONLINE AGORA</div>
-        <p class="editable" data-id="footer-title">ROMULO PONTUAL CLIMATIZAÇÃO E ELÉTRICA</p>
-        <p class="editable" data-id="footer-phone" style="margin-top:5px;">(87) 9913-2068 • Mirandiba / Pernambuco</p>
-        <p style="margin-top:20px; opacity:0.5; font-size:10px;">Desenvolvido com Tecnologia Nano-Web</p>
+        <p>ROMULO PONTUAL CLIMATIZAÇÃO E ELÉTRICA</p>
+        <p style="opacity:0.5; font-size:10px; margin-top:10px;">Desenvolvido com Tecnologia Nano-Web</p>
     </footer>
 
     <div class="whatsapp-widget">
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <div class="operator-img"><img src="perfil.jpg" alt="Atendente"></div>
-                <div class="chat-info"><h4>Romulo Pontual</h4><p>Online agora 🟢</p></div>
-                <div style="margin-left:auto; cursor:pointer; color:#000;" onclick="toggleChat()">✕</div>
-            </div>
-            <div class="chat-body">
-                <div class="message-bubble">Olá! 👋<br>Precisa de um orçamento ou emergência elétrica?<div class="message-time">Agora</div></div>
-            </div>
-            <div class="chat-footer">
-                <a href="https://wa.me/558799132068?text=Olá,%20vim%20pelo%20site%20e%20preciso%20de%20atendimento!" class="btn-start-chat" target="_blank">
-                    INICIAR CONVERSA
-                </a>
-            </div>
-        </div>
-        <div class="whatsapp-trigger" onclick="toggleChat()">
-            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <div class="whatsapp-trigger" onclick="window.open('https://wa.me/558799132068', '_blank')">
+            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
         </div>
     </div>
 
     <script>
-        // --- EFEITO NEVE ULTRA-OTIMIZADO ---
         function createSnow() {
             const container = document.getElementById('snow-container');
-            const flakeCount = 20; 
-            
-            for (let i = 0; i < flakeCount; i++) {
+            for(let i=0; i<20; i++) {
                 const flake = document.createElement('div');
                 flake.className = 'snowflake';
                 flake.innerHTML = '❄';
                 flake.style.left = Math.random() * 100 + 'vw';
                 flake.style.animationDuration = Math.random() * 5 + 3 + 's';
-                
-                // CALIBRAGEM MATEMÁTICA DA VISIBILIDADE (0.4 a 0.9)
-                flake.style.opacity = Math.random() * 0.5 + 0.4; 
-                
+                flake.style.opacity = Math.random() * 0.5 + 0.4;
                 flake.style.fontSize = Math.random() * 10 + 10 + 'px';
                 container.appendChild(flake);
-                
-                flake.addEventListener('animationiteration', () => {
-                    flake.style.left = Math.random() * 100 + 'vw';
-                });
+                flake.addEventListener('animationiteration', () => { flake.style.left = Math.random() * 100 + 'vw'; });
             }
         }
         createSnow();
-
-        // --- SCROLL REVEAL ---
         window.addEventListener('scroll', () => {
             document.querySelectorAll('.reveal').forEach(el => {
                 if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });
         });
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            loadEdits(); 
-        });
-
-        // --- CHAT WIDGET ---
-        function toggleChat() {
-            const chat = document.getElementById('chatWindow');
-            if (chat.classList.contains('show-chat')) {
-                chat.classList.remove('show-chat');
-            } else {
-                chat.classList.add('show-chat');
-            }
-        }
-
-        // --- SISTEMA ADMIN SECRETO ---
-        let clickCount = 0;
-        const trigger = document.getElementById('adminTrigger');
-
-        trigger.addEventListener('click', () => {
-            clickCount++;
-            if(clickCount === 5) {
-                const pass = prompt("🔐 SENHA ADMIN:");
-                if(pass === "admin0") {
-                    enableEditing();
-                } else {
-                    alert("❌ Senha Incorreta.");
-                }
-                clickCount = 0;
-            }
-            setTimeout(() => clickCount = 0, 2000);
-        });
-
-        function enableEditing() {
-            document.body.classList.add('admin-mode');
-            alert("✅ MODO EDIÇÃO ATIVADO!\n\nClique em qualquer texto para editar.\nAs alterações são salvas automaticamente.");
-            
-            document.querySelectorAll('.editable').forEach(el => {
-                el.contentEditable = "true";
-                el.addEventListener('input', () => {
-                    const id = el.getAttribute('data-id');
-                    if(id) localStorage.setItem('site_edit_' + id, el.innerHTML);
-                });
-            });
-        }
-
-        function loadEdits() {
-            document.querySelectorAll('.editable').forEach(el => {
-                const id = el.getAttribute('data-id');
-                if(id) {
-                    const saved = localStorage.getItem('site_edit_' + id);
-                    if(saved) el.innerHTML = saved;
-                }
-            });
-        }
+        window.addEventListener('load', () => document.querySelectorAll('.reveal').forEach(el => el.classList.add('active')));
     </script>
 </body>
 </html>
